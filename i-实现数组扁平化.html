@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 3, [5, 6, [7, 8, 9]]];
+
+      // 第一种方法
+      // 使用数组原生的flat(指定嵌套数组结构应该展平的深度级别。默认为 1。)
+      // console.log(arr.flat(2)); //这里也可以写比2大的，得到的结果一样
+      let result = [];
+      Array.prototype.myFlat = function () {
+        let arr = this;
+        arr.forEach((item) => {
+          if (Array.isArray(item)) {
+            result.concat(item.myFlat());
+          } else {
+            result.push(item);
+          }
+        });
+        return result;
+      };
+
+      console.log(arr.myFlat());
+    </script>
+  </body>
+</html>
