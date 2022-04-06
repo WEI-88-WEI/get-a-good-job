@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var name = '栓';
+        var quan = {
+            name: '铨'
+        };
+        function sayName(obj) {
+            console.log(this.name)
+            console.log(obj)
+        }
+
+        // 比较好理解的
+        // Function.prototype.myBind = function (context) {
+        //     if (typeof this !== 'function') {
+        //         throw new TypeError('not function')
+        //     }
+        //     let _this = this
+        //     console.log(arguments)
+        //     // 自己的理解是，因为用了闭包这里得先接受他一遍参数
+        //     let args = [...arguments].slice(1)
+        //     // 处理函数使用new的情况
+        //     return function F() {
+        //         if (this instanceof F) {
+        //             return new _this(...args, ...arguments)
+        //         } else {
+        //             return _this.apply(context, args.concat(...arguments))
+        //         }
+        //     }
+        // }
+
+        // 简化版
+        Function.prototype.myBind = function (context) {
+            let _this = this
+            let args = [...arguments].slice(1)
+            return function F() {
+                return _this.apply(context, args)
+            }
+        }
+
+        sayName()
+        let _ = sayName.myBind(quan, 'tt')
+        _()
+    </script>
+</body>
+
+</html>

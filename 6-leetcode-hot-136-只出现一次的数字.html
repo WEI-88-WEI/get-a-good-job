@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //  * 异或例子:
+        //  * 1^1 = 0
+        //  * 0^0 = 0
+        //  * 0^1 = 1
+        //  * 0^2 = 2
+
+        // 方法一
+        // var singleNumber = function(nums) {
+        //     let result = 0;
+        //     nums.forEach((item,index)=>{
+        //         result ^= item
+        //     })
+        //     return result
+        // };
+
+        // 方法二(暴力法 )
+        // var singleNumber = function (nums) {
+        //     let flag = false;
+        //     // 一开始得sort，不然在倒数第二个元素的时候判断不出来
+        //     // nums.sort(function(a,b){return a-b})
+        //     nums.sort()
+        //     console.log(nums)
+        //     // 这样写其实就避免了i和j相等的时候
+        //     for (let i = 0; i < nums.length; i++) {
+        //         // 只要配对好了一对,他其实就会变成false,所以在这里得给他重置一下
+        //         flag = false
+        //         for (let j = i + 1; j < nums.length - 1; j++) {
+        //             if (nums[i] === nums[j]) {
+        //                 flag = true;
+        //                 // break的时候得自己加一
+        //                 i += 1;
+        //                 break;
+        //             }
+        //         }
+        //         if (!flag || i === nums.length - 1) {
+        //             return nums[i]
+        //         }
+
+        //     }
+        // };
+
+        // 方法二(也是暴力法)
+        var singleNumber = function (nums) {
+            nums.sort()
+            for (let i = 0; i < nums.length; i++) {
+                if (nums.indexOf(nums[i]) === nums.lastIndexOf(nums[i])) {
+                    return nums[i];
+                }
+            }
+        }
+        // console.log(singleNumber([2, 1, 2]))
+        console.log(singleNumber([2, 2, 1]))
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var name = '栓';
+        var quan = {
+            name:'铨'
+        };
+        function sayName(arr){
+            console.log(this.name)
+            console.log(arr)
+        }
+        Function.prototype.myAplly = function(context){
+            if(typeof this !== 'function'){
+                throw new TypeError('not function')
+            }
+            context = context || window
+            context.fn = this
+            console.log(arguments)
+            let result
+            if(arguments[1]){
+                result = context.fn([...arguments][1])
+            }else{
+                result = context.fn()
+            }
+            delete context.fn
+            return result;
+        }
+        sayName()
+        sayName.myAplly(quan,['tt'])
+    </script>
+</body>
+</html>

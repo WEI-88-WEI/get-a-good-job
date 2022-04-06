@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tree转list</title>
+</head>
+
+<body>
+    <script>
+        let tree = [
+            {
+                id: 1, name: 'boss', parentId: 0, children: [
+                    {
+                        id: 2, name: 'lily', parentId: 1, children: [
+                            { id: 4, name: 'john', parentId: 2 }
+                        ]
+                    },
+                    { id: 3, name: 'jack', parentId: 1 }
+                ]
+            },
+            { id: 5, name: 'boss2', parentId: 0 }
+        ]
+
+        let arr = []
+        function treeToList(tr) {
+            tr.forEach(item => {
+                let temp = JSON.parse(JSON.stringify(item))
+                delete temp.children
+                arr.push(temp)
+                if (item.children) {
+                    return treeToList(item.children)
+                }
+            })
+            return arr
+        }
+        console.log(treeToList(tree))
+    </script>
+</body>
+
+</html>

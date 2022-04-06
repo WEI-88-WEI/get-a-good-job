@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 输入:afe,abcdea
+        // 输出:-1
+        // 输入:ace,abcde
+        // 输出:4
+        // 可以间隔很多字符,但是后一个字符位置得在前一个字符后面
+        // 找到字串的最后一个字符最近的位置
+        // 这个算法只对了40%的用例
+        function getIndex(targetStr, strs) {
+            let targetIndex = -1;
+            let arr = targetStr.split("");
+            for (let i = 0; i < targetStr.length; i++) {
+                let temp = strs.indexOf(targetStr[i])
+                if (temp === -1) {
+                    return -1;
+                }else if (temp > targetIndex) {
+                    targetIndex = temp;
+                }
+            }
+            return targetIndex;
+
+        }
+        console.log(getIndex("ace", "abcdee"))
+    </script>
+</body>
+
+</html>

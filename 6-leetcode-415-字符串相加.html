@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function add(num1, num2) {
+        let maxLength = Math.max(num1.length, num2.length);
+        // 补0
+        num1 = num1.padStart(maxLength, "0");
+        num2 = num2.padStart(maxLength, "0");
+        // 结果
+        let sum = "";
+        // 进位
+        let j = 0;
+        // 暂存
+        let temp = 0;
+        for (let i = num1.length - 1; i >= 0; i--) {
+          temp = parseInt(num1[i]) + parseInt(num2[i]) + j;
+          sum = sum + (temp % 10);
+          j = Math.floor(temp / 10);
+        }
+        if (j === 1) {
+          sum = "1" + sum;
+        }
+        return sum;
+      }
+      console.log(
+        add("943850385083490583490573405", "73850385083490583490573405")
+      );
+    </script>
+  </body>
+</html>

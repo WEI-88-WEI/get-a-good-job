@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #quan {
+            margin: 0 auto;
+            width: 300px;
+            height: 300px;
+            line-height: 300px;
+            text-align: center;
+            font-size: 20px;
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 防抖是控制次数，节流是控制频率 -->
+    <div id="quan"></div>
+    <script>
+        let box = document.getElementById('quan')
+        let i = 0
+        box.addEventListener('mousemove', debu(() => {
+            i++;
+            box.innerHTML = i
+        }, 2000))
+
+        // 两个写法一样的
+        // box.addEventListener('mousemove', debu(function(){
+        //     i++;
+        //     box.innerHTML = i
+        // }, 2000))
+
+        // 不是立即执行版本
+        // function debu(fn, wiat = 1000) {
+        //     let timer = null
+        //     // 这里的arguments有传递的参数
+        //     console.log(arguments)
+        //     return function () {
+        //         let ctx = this
+        //         let args = arguments
+        //         if (timer) {
+        //             clearTimeout(timer)
+        //         }
+        //         // 这里的this指的是这个box
+        //         // console.log(this)
+        //         // 这里的arguments会有传递的参数
+        //         console.log(arguments)
+        //         timer = setTimeout(() => {
+        //         // 因为arguments是数组所以最好是apply
+        //             fn.apply(ctx, args)
+        //         }, wiat)
+        //     }
+
+        //     // 用箭头函数
+        //     // return () => {
+        //     //     if (timer) {
+        //     //         clearTimeout(timer)
+        //     //     }
+        //     //     // 这里的this指向window
+        //     //     console.log(this)
+        //     //     // 这里的arguments会有传递的参数
+        //     //     console.log(arguments)
+        //     //     timer = setTimeout(() => {
+        //     //         fn.apply()
+        //     //     }, wiat)
+        //     // }
+        // }
+
+        // 这是立即执行版
+        function debu(fn, wiat=1000) {
+            let timer = null
+            let flag = null
+            // return function () {
+            //     let ctx = this
+            //     let args = arguments
+            //     console.log(this)
+            //     console.log(arguments)
+            //     flag = !timer
+            //     if (timer) {
+            //         clearTimeout(timer)
+            //     }
+            //     timer = setTimeout(() => {
+            //         timer = null
+            //     },wiat)
+            //     flag && fn.apply(ctx, args)
+            // }
+
+            // 箭头函数版本(this和arguments的差异和不立即执行版的一样)
+            return ()=>{
+                let ctx = this
+                let args = arguments
+                console.log(this)
+                console.log(arguments)
+                flag = !timer
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(() => {
+                    timer = null
+                },wiat)
+                flag && fn.apply(ctx, args)
+            }
+        }
+    </script>
+</body>
+
+</html>

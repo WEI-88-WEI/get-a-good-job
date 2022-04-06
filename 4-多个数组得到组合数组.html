@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [['丁', '卫', '铨'],['a', 'b', 'c'],['1','2','3']]
+        // （SKU的时候会用到）
+        function getCombination(arr) {
+            let sarr = [[]];
+            debugger;
+            for (let i = 0; i < arr.length; i++) {
+                let tarr = [];
+                for (let j = 0; j < sarr.length; j++) {
+                    for (let k = 0; k < arr[i].length; k++) {
+                        tarr.push(sarr[j].concat(arr[i][k]));
+                    }
+                }
+                sarr = tarr;
+            }
+            return sarr;
+        }
+        console.log(getCombination(arr))
+    </script>
+</body>
+
+</html>

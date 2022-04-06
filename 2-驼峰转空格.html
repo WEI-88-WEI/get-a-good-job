@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let str = "thisIsDog"
+
+        // 方法一
+        // function strTranform(str) {
+        //     let arr = str.split('');
+        //     arr.forEach((item,index) => {
+        //         let temp = item.charCodeAt(0);
+        //         if (temp >= 65 && temp <= 90) {
+        //             // 这里得这样写，如果写item还是原来的值
+        //             arr[index] = '_' + item.toLowerCase();//可行
+        //             item = '_' + item.toLowerCase();//不可行
+        //         }
+        //     })
+        //     return arr.join('')
+        // }
+
+        // 方法二
+        function strTranform(str) {
+            // 外面的括号必须加
+            return str.replace(/([A-Z])/g,'_$1').toLowerCase()
+        }
+
+        console.log(strTranform(str))
+    </script>
+</body>
+
+</html>

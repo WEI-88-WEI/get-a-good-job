@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        background: #eee;
+        width: 600px;
+        height: 10000px;
+        margin: 0 auto;
+      }
+
+      .sticky-box {
+        position: -webkit-sticky;
+        position: sticky;
+        height: 60px;
+        margin-bottom: 50px;
+        background: #10af7e;
+        top: 0px;
+      }
+
+      div {
+        font-size: 30px;
+        text-align: center;
+        color: #fff;
+        line-height: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sticky-box">Javan的博客</div>
+      <div class="sticky-box">今日头条</div>
+      <div class="sticky-box">慕课网</div>
+      <div class="sticky-box">Sticky</div>
+    </div>
+    <script>
+        console.log(Object.prototype.toString.call([]).slice(8,-1))
+    </script>
+  </body>
+</html>

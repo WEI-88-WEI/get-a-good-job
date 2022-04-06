@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list转tree</title>
+</head>
+
+<body>
+    <script>
+        let arr = [
+            { id: 1, name: 'boss', parentId: 0 },
+            { id: 2, name: 'lily', parentId: 1 },
+            { id: 3, name: 'jack', parentId: 1 },
+            { id: 4, name: 'john', parentId: 2 },
+            { id: 5, name: 'boss2', parentId: 0 },
+        ]
+
+        // 第一种方法
+        // 使用递归
+        // 这个也是修改原数组，只是说在满足条件（item.parentId === pId）的时候把相应的item放到另一个数组里
+        // 其实也发生了和下面一样的问题
+        function listToTree(arr, pId) {
+                // debugger;
+            let result = [];
+            arr.forEach(item => {
+                if (item.parentId === pId) {
+                    let temp = listToTree(arr, item.id)
+                    // 加一层判断去掉children为空
+                    if (temp.length) {
+                        item.children = temp
+                    }
+                    result.push(item)
+                }
+            })
+            // console.log(arr)
+            return result;
+        }
+        console.log(listToTree(arr,0))
+
+        // 第二种方法
+        // 这种方法可以实现，但是就是在原数组的基础上改动，在给一个节点push了children的前提下，
+        // 如果后面的操作会给children的节点在加children，那也会反应在一开始加了的节点上，可能数组是地址引用的结果
+        // （总之就是一个节点已经作为children加了上去，如果他的后面还有children，加了之后，虽然操作在后面，但是这个节点后面也会有children）
+        // function listToTree(oldArr) {
+        //     oldArr.forEach(element => {
+        //         let parentId = element.parentId;
+        //         if (parentId !== 0) {
+        //             oldArr.forEach(ele => {
+        //                 if (ele.id == parentId) {
+        //                     if (!ele.children) {
+        //                         ele.children = [];
+        //                     }
+        //                     ele.children.push(element);
+        //                 }
+        //             });
+        //         }
+        //         console.log(oldArr)
+        //     });
+        //     console.log(oldArr)  //此时的数组是在原基础上补充了children;
+        //     oldArr = oldArr.filter(ele => ele.parentId === 0); //这一步是过滤，按树展开，将多余的数组剔除；
+        //     return oldArr;
+        // }
+        // console.log(listToTree(arr))
+    </script>
+</body>
+
+</html>
